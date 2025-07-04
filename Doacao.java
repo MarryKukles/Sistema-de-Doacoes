@@ -11,8 +11,6 @@ public class Doacao {
     private String unidade;
     private LocalDate data;
 
-    // Formato de data: DD/MM/AAAA
-    // AGORA É PÚBLICO para ser acessível de outras classes no mesmo pacote
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public Doacao(String tipo, String descricao, double quantidade, String unidade, String data) {
