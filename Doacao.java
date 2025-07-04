@@ -8,23 +8,18 @@ public class Doacao {
     private String tipo;
     private String descricao;
     private double quantidade;
-    private String unidade; // NOVO: Adicionado o campo unidade
+    private String unidade;
     private LocalDate data;
 
     // Formato de data: DD/MM/AAAA
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    // AGORA É PÚBLICO para ser acessível de outras classes no mesmo pacote
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    // Construtor original (ainda pode ser útil se tiver outras fontes de dados)
-    // public Doacao(String tipo, String descricao, double quantidade, String data) {
-    //     this(tipo, descricao, quantidade, "", data); // Chama o novo construtor com unidade vazia
-    // }
-
-    // NOVO Construtor que inclui 'unidade'
     public Doacao(String tipo, String descricao, double quantidade, String unidade, String data) {
         setTipo(tipo);
         setDescricao(descricao);
         setQuantidade(quantidade);
-        setUnidade(unidade); // Definir a unidade
+        setUnidade(unidade);
         setData(data);
     }
 
@@ -58,11 +53,11 @@ public class Doacao {
         this.quantidade = quantidade;
     }
 
-    public String getUnidade() { // Getter para unidade
+    public String getUnidade() {
         return unidade;
     }
 
-    public void setUnidade(String unidade) { // Setter para unidade
+    public void setUnidade(String unidade) {
         this.unidade = unidade != null ? unidade.trim() : "";
     }
 
@@ -80,13 +75,11 @@ public class Doacao {
 
     @Override
     public String toString() {
-        // Ajustado para incluir a unidade, separada por ponto e vírgula
-        // Se a unidade for vazia (ex: para Dinheiro ou Roupa), ela será salva como string vazia.
         return String.join(";",
             tipo,
             descricao,
             String.valueOf(quantidade),
-            unidade, // Inclui a unidade
+            unidade,
             data.format(FORMATTER)
         );
     }
