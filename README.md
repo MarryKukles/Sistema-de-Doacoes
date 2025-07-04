@@ -28,11 +28,13 @@ O sistema permite o registro, armazenamento e análise das doações realizadas,
 ## 🛠️ Tecnologias / Conceitos
 
 - **Java SE** (JDK 17+)
+- Swing
 - Programação orientada a objetos (POO)
-- ArrayList para armazenamento
+- Estruturas de Dados (`ArrayList`)
 - Condicionais e laços de repetição
 - Manipulação de arquivos (`BufferedReader`, `BufferedWriter`)
 - Tratamento de exceções
+- API de Data e Hora (`java.time`)
 
 ---
 
@@ -53,8 +55,9 @@ java SistemaPrincipal
 📁 DoacoesRS
  ├── Doacao.java                  # Classe que representa a doação
  ├── GerenciadorDoacoes.java       # Classe que gerencia as doações
- ├── SistemaPrincipal.java         # Classe principal com o menu
- ├── doacoes.txt                   # Arquivo gerado automaticamente com os registros
+ ├── SistemaPrincipal.java         # Classe principal com o menu de console (versão CLI do sistema)
+ ├── SistemaDoacoesGUI.java        # Classe principal com a Interface Gráfica do Usuário (GUI) 
+ ├── doacoes.txt                   # Arquivo gerado automaticamente para armazenar os registros das doações
  └── README.md                     # Documentação do projeto
 ```
 
