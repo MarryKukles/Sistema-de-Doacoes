@@ -41,10 +41,10 @@ O sistema permite o registro, armazenamento e análise das doações realizadas,
 ## 🚀 Como executar
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/MarryKukles/Sistema-de-Doacoes.git
 cd seu-repositorio
-javac Doacao.java GerenciadorDoacoes.java SistemaPrincipal.java
-java SistemaPrincipal
+javac sistemadoacoes/*.java
+java sistemadoacoes.SistemaDoacoesGUI
 ```
 
 ---
@@ -53,7 +53,7 @@ java SistemaPrincipal
 
 ```
 📁 DoacoesRS
- ├── Doacao.java                  # Classe que representa a doação
+ ├── Doacao.java                   # Classe que representa a doação
  ├── GerenciadorDoacoes.java       # Classe que gerencia as doações
  ├── SistemaPrincipal.java         # Classe principal com o menu de console (versão CLI do sistema)
  ├── SistemaDoacoesGUI.java        # Classe principal com a Interface Gráfica do Usuário (GUI) 
