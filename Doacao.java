@@ -3,27 +3,29 @@ package sistemadoacoes;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Locale; 
 
 public class Doacao {
     private String tipo;
     private String descricao;
     private double quantidade;
-    private String unidade;
+    private String unidade; // NOVO: Adicionado o campo unidade
     private LocalDate data;
 
-     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
+    // Formato de data: DD/MM/AAAA
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+    // Construtor original (ainda pode ser útil se tiver outras fontes de dados)
+    // public Doacao(String tipo, String descricao, double quantidade, String data) {
+    //     this(tipo, descricao, quantidade, "", data); // Chama o novo construtor com unidade vazia
+    // }
+
+    // NOVO Construtor que inclui 'unidade'
     public Doacao(String tipo, String descricao, double quantidade, String unidade, String data) {
         setTipo(tipo);
         setDescricao(descricao);
         setQuantidade(quantidade);
-        setUnidade(unidade);
+        setUnidade(unidade); // Definir a unidade
         setData(data);
-    }
-
-     public Doacao(String tipo, String descricao, double quantidade, String data) {
-        this(tipo, descricao, quantidade, "", data); 
     }
 
     public String getTipo() {
@@ -56,11 +58,11 @@ public class Doacao {
         this.quantidade = quantidade;
     }
 
-    public String getUnidade() {
+    public String getUnidade() { // Getter para unidade
         return unidade;
     }
 
-    public void setUnidade(String unidade) {
+    public void setUnidade(String unidade) { // Setter para unidade
         this.unidade = unidade != null ? unidade.trim() : "";
     }
 
@@ -78,11 +80,14 @@ public class Doacao {
 
     @Override
     public String toString() {
-               if (!unidade.isEmpty()) {
-            return String.format(Locale.US, "%s;%s;%.2f;%s;%s", tipo, descricao, quantidade, unidade, data.format(FORMATTER));
-        } else {
-           
-            return String.format(Locale.US, "%s;%s;%.2f;;%s", tipo, descricao, quantidade, data.format(FORMATTER));
-        }
+        // Ajustado para incluir a unidade, separada por ponto e vírgula
+        // Se a unidade for vazia (ex: para Dinheiro ou Roupa), ela será salva como string vazia.
+        return String.join(";",
+            tipo,
+            descricao,
+            String.valueOf(quantidade),
+            unidade, // Inclui a unidade
+            data.format(FORMATTER)
+        );
     }
 }
