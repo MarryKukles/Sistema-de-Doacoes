@@ -7,13 +7,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.List; 
 
 public class SistemaDoacoesGUI extends JFrame {
     private GerenciadorDoacoes gerenciador;
 
-    private final Color PRIMARY_DARK = new Color(43, 43, 43); // Cor de fundo principal (quase preto)
-    private final Color SECONDARY_DARK = new Color(60, 63, 65); // Cor de fundo para painéis internos
-    private final Color TEXT_LIGHT = new Color(204, 204, 204); // Cor de texto claro
+    private final Color PRIMARY_DARK = new Color(43, 43, 43); // Cor de fundo principal 
+    private final Color SECONDARY_DARK = new Color(60, 63, 65);
+    private final Color TEXT_LIGHT = new Color(204, 204, 204); 
     
     private final Color ACCENT_GREEN = new Color(76, 175, 80); // Verde para ações positivas
     private final Color ACCENT_BLUE = new Color(33, 150, 243); // Azul para ações informativas
@@ -85,17 +86,19 @@ public class SistemaDoacoesGUI extends JFrame {
         
         botao.setOpaque(true); 
         
-          botao.setBorder(BorderFactory.createCompoundBorder(
+    
+        botao.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(cor.darker(), 2), 
             BorderFactory.createEmptyBorder(10, 20, 10, 20) 
         ));
-
+        
         botao.addMouseListener(new java.awt.event.MouseAdapter() {
             private Color originalColor = cor; 
 
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                               botao.setBackground(originalColor.brighter()); 
-                botao.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
+
+                botao.setBackground(originalColor.brighter()); 
+                botao.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 botao.setBackground(originalColor); 
@@ -240,7 +243,11 @@ public class SistemaDoacoesGUI extends JFrame {
     }
 
     private void exibirRelatorio() {
-        if (gerenciador.getDoacoes().isEmpty()) {
+        System.out.println("Entrando em exibirRelatorio()..."); 
+        List<Doacao> currentDoacoes = gerenciador.getDoacoes();
+        System.out.println("Número de doações encontradas: " + currentDoacoes.size()); 
+
+        if (currentDoacoes.isEmpty()) {
             UIManager.put("OptionPane.background", SECONDARY_DARK);
             UIManager.put("Panel.background", SECONDARY_DARK);
             UIManager.put("OptionPane.messageForeground", TEXT_LIGHT);
@@ -253,8 +260,11 @@ public class SistemaDoacoesGUI extends JFrame {
             UIManager.put("OptionPane.messageForeground", null);
             UIManager.put("Button.background", null);
             UIManager.put("Button.foreground", null);
+            System.out.println("Nenhuma doação cadastrada, exibindo mensagem informativa e retornando."); 
             return;
         }
+
+        System.out.println("Doações encontradas, preparando a tabela do relatório..."); 
 
         String[] colunas = {"Tipo", "Descrição", "Quantidade/Valor", "Unidade", "Data"}; 
         DefaultTableModel model = new DefaultTableModel(colunas, 0);
@@ -308,12 +318,13 @@ public class SistemaDoacoesGUI extends JFrame {
 
 
         JFrame janelaRelatorio = new JFrame("Relatório de Doações");
-        janelaRelatorio.setSize(750, 500);
+        janelaRelatorio.setSize(750, 500); 
         janelaRelatorio.setLocationRelativeTo(this);
         janelaRelatorio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         janelaRelatorio.getContentPane().setBackground(PRIMARY_DARK);
         janelaRelatorio.add(scroll);
         janelaRelatorio.setVisible(true);
+        System.out.println("Janela de relatório criada e setada para visível.");
     }
 
     private void limparDoacoes() {
@@ -365,7 +376,7 @@ public class SistemaDoacoesGUI extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {
-                           new SistemaDoacoesGUI().setVisible(true);
+                new SistemaDoacoesGUI().setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
